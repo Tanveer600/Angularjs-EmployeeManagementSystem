@@ -1,0 +1,141 @@
+﻿@{
+    string currentMenu = "";
+    string currentSub = "";
+    if (ViewBag.MenuName != null)
+    {
+        currentMenu = ViewBag.MenuName;
+    }
+    if (ViewBag.SubMenu != null)
+    {
+        currentSub = ViewBag.SubMenu;
+    }
+    var currentUser = Session["user"] as DDSAnalytics.DataModel.UserDataModel;
+    var isAdmin = currentUser?.user?.IsAdmin == true;
+}
+
+
+
+<div id="scrollbar">
+    <div class="container-fluid">
+
+        <div id="two-column-menu">
+        </div>
+        <ul class="navbar-nav" id="navbar-nav">
+            <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+
+            @if (isAdmin || currentUser?.userRole?.CanViewDashboard == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/Home" ng-class="'@currentMenu'=='Dashboard'?'active':''">
+                        <i class="ri-home-2-line"></i>
+                        <span data-key="t-dashboards">Dashboard</span>
+                    </a>
+                </li>
+            }
+
+
+
+            @if (isAdmin || currentUser?.userRole?.CanViewEnrollmentList == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/Enrollment" ng-class="'@currentMenu'=='Enrollment'?'active':''">
+                        <i class="ri-user-add-line"></i> <!-- Changed icon for Enrollment -->
+                        <span data-key="t-reports">Enrollment List</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewAttendanceLogs == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/DailyAttendance" ng-class="'@currentMenu'=='DailyAttendance'?'active':''">
+                        <i class="ri-calendar-check-line"></i>
+                        <span data-key="t-reports">Attendance Logs</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewAttendanceSummaryReport == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/AttendanceSummary" ng-class="'@currentMenu'=='AttendanceSummary'?'active':''">
+                        <i class="ri-dashboard-2-line"></i>
+                        <span data-key="t-dashboards">Attendance Summary</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewAttendanceLogs == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/EmployeeDetail" ng-class="'@currentMenu'=='EmployeeDetail'?'active':''">
+                        <i class="ri-user-2-line"></i>
+                        <span data-key="t-dashboards">Employee Report</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewEmployeeAttendanceReport == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/AttendanceDetail" ng-class="'@currentMenu'=='AttendanceDetail'?'active':''">
+                        <i class="ri-timer-2-line"></i>
+                        <span data-key="t-dashboards">Attendance Report</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewExceptionReport == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/ExceptionReport" ng-class="'@currentMenu'=='ExceptionReport'?'active':''">
+                        <i class="ri-clockwise-line"></i>
+                        <span data-key="t-dashboards">Exception Report</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewExceptionReport == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/ManualAttendance" ng-class="'@currentMenu'=='ManualAttendance'?'active':''">
+                        <i class="ri-clockwise-line"></i>
+                        <span data-key="t-dashboards">Manual Attendance</span>
+                    </a>
+                </li>
+            }
+            @if (isAdmin || currentUser?.userRole?.CanViewLeaveReport == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#leaveSubMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leaveSubMenu">
+                        <i class="ri-ticket-2-line"></i>
+                        <span data-key="t-dashboards">Leave Management</span>
+                    </a>
+
+                    <div class="collapse" id="leaveSubMenu">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AddEditLeaves" ng-class="'@currentMenu'=='AddEditLeaves'?'active':''">
+                                    List
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/LeaveReport" ng-class="'@currentMenu'=='LeaveReport'?'active':''">
+                                    Leaves Report
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            }
+
+            @if (isAdmin || currentUser?.userRole?.CanViewManageSettings == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/Home/Settings" ng-class="'@currentMenu'=='Settings'?'active':''">
+                        <i class="ri-settings-2-line"></i>
+                        <span data-key="t-user">Settings</span>
+                    </a>
+                </li>
+            }
+        </ul>
+
+    </div>
+    <!-- Sidebar -->
+</div>
+
+<div class="sidebar-background"></div>

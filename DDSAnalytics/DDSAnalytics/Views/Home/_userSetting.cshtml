@@ -1,0 +1,185 @@
+﻿<script src="~/Scripts/app/users.js"></script>
+<div class="row" ng-controller="userController">
+    <div class="col-lg-12">
+        <div class="card" id="customerList">
+            <div class="card-header border-bottom-dashed">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0">
+                                Users List
+                            </h5>
+                        </div>
+                        <div class="input-group mt-3" style="max-width: 400px;">
+                            <input type="text" class="form-control" ng-model="searchUser" placeholder="Search users..." aria-label="Search roles">
+                        </div>
+                    </div>
+                    <div class="col-sm-auto">
+                        <div class="d-flex flex-wrap align-items-start gap-2">
+                            <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                            <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showUserModal" ng-click="createNew()"><i class="ri-add-line align-bottom me-1"></i> Add New </button>
+                        </div>
+                        <div class="mt-3 d-flex align-items-center" style="gap: 4px;">
+                            <span>Show</span>
+                            <select class="form-select form-select-sm p-1" style="width: 55px; min-width: 55px; padding-right: 18px;"
+                                    ng-options="size as size for size in [10, 20, 50, 100, 500]"
+                                    ng-model="pageSize"
+                                    ng-change="updatePageSize()">
+                            </select>
+                            <span>entries</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div>
+                    <div class="table-responsive table-card mb-1">
+                        <table class="table align-middle" id="customerTable">
+                            <thead class="table-light text-muted">
+                                <tr>
+                                    <th class="sort" style="width:100px" data-sort="customer_name"><a href="#" ng-click="sort('UserName')">User Name<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th class="sort" style="width:100px" data-sort="LoginID"><a href="#" ng-click="sort('LoginID')">Login ID<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th class="sort" style="width:100px" data-sort="LoginID"><a href="#" ng-click="sort('Role')">Role<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th class="sort" style="width:100px" data-sort="LoginID"><a href="#" ng-click="sort('Role')">IsAdmin<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th class="sort" style="width:100px" data-sort="LoginID"><a href="#" ng-click="sort('Role')">Employee<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th width="50px" data-sort="action">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="list form-check-all">
+                                <tr dir-paginate="u in userList | orderBy:sortKey:sortReverse | filter: searchUser: strict | itemsPerPage: pageSize" pagination-id="pagination" ng-cloak>
+                                    <td class="customer_name">{{u.user.Name}}</td>
+                                    <td class="LoginID">{{u.user.LoginID}}</td>
+                                    <td class="LoginID">{{u.userRole.Name}}</td>
+                                    <td class="LoginID">{{u.user.IsAdmin}}</td>
+                                    <td class="LoginID">{{u.currentEnrollment.EnrollName}}</td>
+                                    <td style="width: 1%; white-space: nowrap;">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="ri-more-fill align-middle"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item edit-item-btn" data-bs-toggle="modal" data-bs-target="#showUserModal" ng-click="getEdit(u)">
+                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item edit-item-btn" ng-click="getDelete(u)">
+                                                        <i class="ri-delete-bin-2-fill align-bottom me-2 text-muted"></i> Delete
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <div class="row align-items-center mt-2" ng-show="userList.length>0" ng-cloak>
+                        <div class="col-sm-12 col-md-3 text-left">
+                            <div>
+                                {{(pageSize * (currentPage - 1)) + 1}} - <span ng-show="pageSize*currentPage<=userList.length">{{ pageSize * currentPage}}</span><span ng-show="pageSize*currentPage>userList.length">{{ userList.length }}</span> / {{ userList.length }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-9">
+                            <dir-pagination-controls pagination-id="pagination" on-Page-Change="getCurrentPage(newPageNumber)" directionLinks="true"
+                                                     template-url="~/Scripts/app/paginat/dirPagination.tpl.html"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="showUserModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-light p-3">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                            </div>
+                            <form class="tablelist-form" autocomplete="off">
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="customername-field" class="form-label"> User Name</label>
+                                                <input type="text" class="form-control" ng-model="currentUser.user.Name" name="UserName" placeholder="Enter User Name" required />
+                                                <div class="invalid-feedback">Please enter  name.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="customername-field" class="form-label">Role</label>
+                                                <select class="form-select"
+                                                        ng-model="selectedRole"
+                                                        ng-change="onRoleSelect(selectedRole)">
+                                                    <option value="" selected>Please select Roles</option>
+                                                    <option ng-repeat="item in roleList" ng-value="item">{{item.Name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="email-field" class="form-label">Login ID</label>
+                                                <input type="text" class="form-control" ng-model="currentUser.user.LoginID" placeholder="Enter Login ID" />
+                                                <div class="invalid-feedback">Please enter Login ID.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="customername-field" class="form-label"> Login Password</label>
+                                                <input type="password" ng-model="currentUser.user.LoginPwd" class="form-control" placeholder="Enter Login Pwd" autocomplete="current-password" required />
+                                                <div class="invalid-feedback">Please enter Login Pwd.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div class="row">
+                                        <!-- Employee Dropdown -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="customername-field" class="form-label">Employee</label>
+                                                    <select class="form-select"
+                                                            ng-model="selectedEnrollment"
+                                                            ng-change="onEnrollSelect(selectedEnrollment)">
+                                                        <option value="" selected>Please select Roles</option>
+                                                        <option ng-repeat="item in enrollmentList" ng-value="item">{{item.EnrollName}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <div class=" d-flex align-items-center">
+                                                    <label class="form-check-label me-2" for="enrollmentToggle">IsAdmin</label>
+                                                    <input class="form-check-input" type="checkbox" id="enrollmentToggle" ng-model="currentUser.user.IsAdmin">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                <div class="modal-footer">
+                                    <div class="hstack gap-2 justify-content-end">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary add-btn" ng-disabled="!currentUser.user.LoginPwd" id="add-btn" ng-click="save()">Save</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--end col-->
+</div>

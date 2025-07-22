@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DDSAnalyticsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CalendarYears" EntityType="DDSAnalyticsDBModel.CalendarYear" />
+    <EntitySet Name="DailyAttendances" EntityType="DDSAnalyticsDBModel.DailyAttendance" />
+    <EntitySet Name="Enrollments" EntityType="DDSAnalyticsDBModel.Enrollment" />
+    <EntitySet Name="GazettedHolidays" EntityType="DDSAnalyticsDBModel.GazettedHoliday" />
+    <EntitySet Name="Leaves" EntityType="DDSAnalyticsDBModel.Leave" />
+    <EntitySet Name="LeaveTypes" EntityType="DDSAnalyticsDBModel.LeaveType" />
+    <EntitySet Name="ManualEntryReasons" EntityType="DDSAnalyticsDBModel.ManualEntryReason" />
+    <EntitySet Name="Roles" EntityType="DDSAnalyticsDBModel.Role" />
+    <EntitySet Name="Users" EntityType="DDSAnalyticsDBModel.User" />
+    <EntitySet Name="AppSettings" EntityType="DDSAnalyticsDBModel.AppSetting" />
+  </EntityContainer>
+  <EntityType Name="CalendarYear">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DailyAttendance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EnrollNo" Type="Double" />
+    <Property Name="Inout" Type="Int32" />
+    <Property Name="VerifyMode" Type="Int32" />
+    <Property Name="DeviceIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DeviceLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AttDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmpID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Enrollment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EnrollNo" Type="Double" />
+    <Property Name="EnrollName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShiftName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShiftStart" Type="DateTime" Precision="3" />
+    <Property Name="ShiftEnd" Type="DateTime" Precision="3" />
+    <Property Name="DeptName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LocalID" Type="Int32" />
+    <Property Name="MinShiftStart" Type="DateTime" Precision="3" />
+    <Property Name="MaxShiftStart" Type="DateTime" Precision="3" />
+    <Property Name="MinShiftEnd" Type="DateTime" Precision="3" />
+    <Property Name="MaxShiftEnd" Type="DateTime" Precision="3" />
+    <Property Name="ShiftDayChange" Type="Int32" />
+    <Property Name="RegisteredOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="GazettedHoliday">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="EnrollNo" Type="Double" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="EmpID" Type="Int32" />
+    <Property Name="LeaveTypeID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveTypeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LeaveTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ManualEntryReason">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CanViewDashboard" Type="Boolean" />
+    <Property Name="CanViewEmployees" Type="Boolean" />
+    <Property Name="CanViewEnrollmentList" Type="Boolean" />
+    <Property Name="CanViewManageSettings" Type="Boolean" />
+    <Property Name="CanViewAttendanceLogs" Type="Boolean" />
+    <Property Name="CanViewAttendanceSummaryReport" Type="Boolean" />
+    <Property Name="CanViewEmployeeAttendanceReport" Type="Boolean" />
+    <Property Name="CanViewDailyAttendanceReport" Type="Boolean" />
+    <Property Name="CanViewExceptionReport" Type="Boolean" />
+    <Property Name="CanViewLeaveReport" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LoginPwd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="IsAdmin" Type="Boolean" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmpID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CoyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AppName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LateMinsAllowed" Type="Double" />
+    <Property Name="EarlyMinsAllowed" Type="Double" />
+    <Property Name="OverTimeMinsAllowed" Type="Double" />
+    <Property Name="ShiftStartTime" Type="DateTime" Precision="3" />
+    <Property Name="ShiftEndTime" Type="DateTime" Precision="3" />
+    <Property Name="BeginClockInMins" Type="Double" />
+    <Property Name="EndClockInMins" Type="Double" />
+    <Property Name="BeginClockOutMins" Type="Double" />
+    <Property Name="EndClockOutMins" Type="Double" />
+    <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+    <Property Name="DayOff1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DayOff2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

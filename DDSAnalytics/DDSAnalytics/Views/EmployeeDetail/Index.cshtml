@@ -1,0 +1,166 @@
+
+@{
+    ViewBag.Title = "Employee Report";
+}
+
+<script src="~/Scripts/app/employeeDetail.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div class="row" ng-controller="employeedetailController">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex justify-content-between">
+                <h4 class="card-title mb-0">Employee Detail Report</h4>
+
+                <div class="d-flex gap-3 align-items-center">
+                    <label>
+                        <input type="radio" name="attendanceFilter" ng-model="attendanceFilter" value="all" ng-change="filterAttendance()" checked /> Show All
+                    </label>
+                    <label>
+                        <input type="radio" name="attendanceFilter" ng-model="attendanceFilter" value="present" ng-change="filterAttendance()"  /> Present Only
+                    </label>
+                    <label>
+                        <input type="radio" name="attendanceFilter" ng-model="attendanceFilter" value="absent" ng-change="filterAttendance()" /> Absent Only
+                    </label>
+                    <label>
+                        <input type="radio" name="attendanceFilter" ng-model="attendanceFilter" value="late" ng-change="filterAttendance()" /> Late Only
+                    </label>
+
+
+                </div>
+            </div>
+
+            <div class="card-body" ng-show="!isCardHidden">
+                <!-- Input fields row -->
+                <div class="row mb-3">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="departmentSelect" class="form-label">Department Name</label>
+                        <select id="departmentSelect" class="form-select"
+                                ng-model="selectedDepartmentName"
+                                ng-change="onDepartmentChange()">
+                            <option value="dept" selected>Select A Department</option>
+                            <option ng-repeat="d in deptList" value="{{d}}">
+                                {{d}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Enroll Name Dropdown -->
+                    <div class="col-md-6 mb-3">
+                        <label for="enrollNameSelect" class="form-label">Employee Name</label>
+                        <select id="enrollNameSelect" class="form-select"
+                                ng-model="selectedEnrolement">
+                            <option value="emp" selected>Select An Employee</option>
+                            <option ng-repeat="enroll in filteredEnrolmentList"
+                                    value="{{enroll.EnrollNo}}">
+                                {{ enroll.EnrollNo + ' - ' + enroll.EnrollName}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                </div>
+                <!-- Input fields row -->
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <input type="date" class="form-control" placeholder="Start Date" ng-model="employeeDetailRequest.DateFrom" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="date" class="form-control" placeholder="End Date" ng-model="employeeDetailRequest.DateTo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="row mb-4 mt-4 align-items-center mx-2">
+                <div class="col-md-4 d-flex justify-content-start gap-2">
+                    <button class="btn btn-sm btn-primary btn-load" ng-click="preview()">
+                        <span class="d-flex align-items-center">
+                            <span class="spinner-border flex-shrink-0" role="status" ng-show="isProcessing">
+                                <span class="visually-hidden">Loading...</span>
+                            </span>
+                            <span class="flex-grow-1 ms-2" ng-hide="isProcessing">Preview</span>
+                            <span class="flex-grow-1 ms-2" ng-show="isProcessing">Processing ...</span>
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger add-btn" ng-click="cancel()">Cancel</button>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <h2 class="fw-bold mb-0">Employee Attendance Report</h2>
+                </div>
+
+                <div class="col-md-4 d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-sm btn-secondary add-btn" ng-click="export()">Export</button>
+                    <button type="button" class="btn btn-sm btn-info add-btn" ng-click="print()">Print</button>
+                </div>
+            </div>
+
+            <!-- Info Labels Two-in-One Row Layout -->
+            <div class="row mb-4" ng-if="employeeDetailList.length > 0">
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex">
+                        <label class="form-label fw-bold me-3" style="width: 140px;">Enroll No:</label>
+                        <span class="text-muted">{{ employeeDetailList[0].EnrollNo }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex">
+                        <label class="form-label fw-bold me-3" style="width: 140px;">Enroll Name:</label>
+                        <span class="text-muted">{{ employeeDetailList[0].EnrollName }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex">
+                        <label class="form-label fw-bold me-3" style="width: 140px;">Department Name:</label>
+                        <span class="text-muted">{{ employeeDetailList[0].DepartmentName }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex">
+                        <label class="form-label fw-bold me-3" style="width: 140px;">Shift Name:</label>
+                        <span class="text-muted">{{ employeeDetailList[0].ShiftName }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="live-preview">
+               
+                <div class="table-responsive table-card ">
+                    <table class="table align-middle table-nowrap mb-0" id="customerTable">
+                        <thead class="table-light text-muted">
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th class="text-center" scope="col">Day</th>
+                                <th class="text-center" scope="col">ClockIn</th>
+                                <th class="text-center" scope="col">ClockOut</th>
+                                <th class="text-center" scope="col">Hours Worked</th>
+                                <th class="text-center" scope="col">Late Minutes</th>
+                                <th class="text-center" scope="col">Early Minutes</th>
+                                <th class="text-center" scope="col">Over Time Minutes</th>
+                                <th class="text-center" scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="scrollable-table-wrapper">
+                            <tr dir-paginate="item in employeeDetailList |  orderBy:sortKey:sortReverse | filter: searchText: strict | itemsPerPage: pageSize" pagination-id="pagination" ng-cloak>
+
+                                <td>{{ item.AttDate | date: 'yyyy-MM-dd' }}</td>
+                                <td class="text-center">{{ item.AttDate | date: 'dd' }}</td>
+                                <td class="text-center">{{ item.ClockIn ? (item.ClockIn | date: 'shortTime') : '-' }}</td>
+                                <td class="text-center">{{ item.ClockOut ? (item.ClockOut | date: 'shortTime') : '-' }}</td>
+                                <td class="text-center">{{ item.HrsWorked }}</td>
+                                <td class="text-center">{{ item.LateMins | number:0 }}</td>
+                                <td class="text-center">{{ item.EarlyMins | number:0 }}</td>
+                                <td class="text-center">{{ item.OvertimeMins | number:0 }}</td>
+                                <td class="text-center">{{ item.Status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+  
+

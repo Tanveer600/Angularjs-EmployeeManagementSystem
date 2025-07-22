@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Settings";
+}
+<script src="~/Scripts/app/generalSetting.js"></script>
+
+<div class="row">
+  
+    <!--end col-->
+    <div class="col-xxl-12" ng-controller="generalSettingController">
+        <div class="card mt-1 mt-md-1">
+            <div class="card-header">
+                <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#GeneralSettings" role="tab">
+                            <i class="fas fa-home"></i> General Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#Roles" role="tab">
+                            <i class="far fa-user"></i> Roles List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#Users" role="tab">
+                            <i class="far fa-envelope"></i> Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#PublicHolidays" role="tab">
+                            <i class="fas fa-calendar-day"></i> Public Holidays
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#LeaveType" role="tab">
+                            <i class="fas fa-calendar-day"></i> Leave Type
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#ManualEntryReason" role="tab">
+                            <i class="fas fa-calendar-day"></i> Manual Entry Reason
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#CalendarYear" role="tab">
+                            <i class="fas fa-calendar-day"></i> Calendar Year
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
+
+                    <!-- General Settings Tab -->
+                    <div class="tab-pane active" id="GeneralSettings" role="tabpanel">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="card mt-1 mt-md-1">
+                                    <div class="card-body p-4">
+                                        <h5 class="mb-4 fw-bold text-primary">Settings</h5>
+                                        <!-- Removed outer form tag -->
+                                        <form name="settingsForm" novalidate>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">App Logo</label>
+                                                <div class="col-sm-10">
+                                                    <input type="file" class="form-control" id="AppLogo"
+                                                           accept="image/jpeg, image/png"
+                                                           file-model="generalSetting.AppLogoFile" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Company Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="CoyName" ng-model="generalSetting.CoyName" placeholder="Enter company name to printed on the reports">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">App Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="AppName" ng-model="generalSetting.AppName" placeholder="Enter app name">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Mark As Late Arrival After</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="LateMinsAllowed" ng-model="generalSetting.LateMinsAllowed" placeholder="Enter duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Mark As Early Leaving Before</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="EarlyMinsAllowed" ng-model="generalSetting.EarlyMinsAllowed" placeholder="Enter duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Start Overtime After</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="OverTimeMinsAllowed" ng-model="generalSetting.OverTimeMinsAllowed" placeholder="Enter duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Begin ClockIn Before</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="BeginClockInMins" ng-model="generalSetting.BeginClockInMins" placeholder="Clock-in start duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">End ClockIn After</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="EndClockInMins" ng-model="generalSetting.EndClockInMins" placeholder="Clock-In end duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Begin ClockOut Before</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="BeginClockOutMins" ng-model="generalSetting.BeginClockOutMins" placeholder="Clock-Out start duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">End ClockOut After</label>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="EndClockOutMins" ng-model="generalSetting.EndClockOutMins" placeholder="Clock-Out end duration in minutes">
+                                                </div>
+                                                <label class="col-sm-8 col-form-label">Minutes</label>
+                                            </div>
+                                            <!-- DayOff1 Dropdown -->
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Day Off 1</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-select" ng-model="generalSetting.DayOff1">
+                                                        <option value="">None</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                        <option value="Sunday">Sunday</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- DayOff2 Dropdown -->
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Day Off 2</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-select" ng-model="generalSetting.DayOff2">
+                                                        <option value="">None</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                        <option value="Sunday">Sunday</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Buttons -->
+                                            <div class="row">
+                                                <div class="col-sm-10 offset-sm-2 text-end">
+                                                    <button type="submit" class="btn btn-primary me-2" ng-click="saveSettings()">Save</button>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </div>
+                    <!--end tab-pane-->
+                    <!-- Public Holidays Tab -->
+                    <div class="tab-pane" id="PublicHolidays" role="tabpanel">
+                        @Html.Partial("_holidaySetting")
+                    </div>
+                    <!-- Access Permissions Tab -->
+                    <div class="tab-pane" id="Roles" role="tabpanel">
+                        @Html.Partial("_rolesSetting")
+                    </div>
+                    <!--end tab-pane-->
+
+                    <div class="tab-pane" id="Users" role="tabpanel">
+                        @Html.Partial("_userSetting")
+                    </div>
+                    <div class="tab-pane" id="LeaveType" role="tabpanel">
+                        @Html.Partial("_leaveType")
+                    </div>
+                    <div class="tab-pane" id="ManualEntryReason" role="tabpanel">
+                        @Html.Partial("_manualEntryReason")
+                    </div>
+                    <div class="tab-pane" id="CalendarYear" role="tabpanel">
+                        @Html.Partial("_calenderYear")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+

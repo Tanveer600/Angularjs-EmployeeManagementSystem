@@ -1,0 +1,78 @@
+﻿<div class="modal fade" id="showenrollmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            </div>
+            <form class="tablelist-form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Dept Name</label>
+                                <input type="text" id="customername-field" class="form-control" ng-model="CurrentEnrollment.DeptName" placeholder="Enter DeptName" name="DeptName" required />
+                                <div class="invalid-feedback">Please enter  DeptName.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">Shift Name</label>
+                                <input type="text" id="email-field" class="form-control" ng-model="CurrentEnrollment.ShiftName" placeholder="Enter Shift Name" required />
+                                <div class="invalid-feedback">Please enter  Shift Name.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="EnrollNo-field" class="form-label"> Enroll No</label>
+                                <input type="text" id="customername-field" ng-model="CurrentEnrollment.EnrollNo" class="form-control" placeholder="Enter Enroll No" required />
+                                <div class="invalid-feedback">Please enter  Enroll No.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ShiftStart-field" class="form-label"> Shift Start</label>
+                                <input type="time" id="customername-field" ng-model="CurrentEnrollment.ShiftStart" class="form-control" placeholder="Enter Shift Start" required />
+                                <div class="invalid-feedback">Please enter  Shift Start.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ShiftEnd-field" class="form-label"> Shift End</label>
+                                <input type="time" id="customername-field" ng-model="CurrentEnrollment.ShiftEnd" class="form-control" placeholder="Enter Shift End" required />
+                                <div class="invalid-feedback">Please enter  Shift End.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="EnrollName-field" class="form-label"> Enrollment Name</label>
+                                <input type="text" id="customername-field" ng-model="CurrentEnrollment.EnrollName" class="form-control" placeholder="Enter Enroll Name" required />
+                                <div class="invalid-feedback">Please enter  Shift End.</div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary add-btn"  id="add-btn" ng-disabled="!CurrentEnrollment.DeptName" ng-click="save()">
+                            <i class="icon-dual-danger mr-1" ng-hide="isProcessing"></i>
+                            <i class="icon-spinner3 spinner mr-1" ng-show="isProcessing"></i>
+                            <span ng-hide="isProcessing">Save</span>
+                            <span ng-show="isProcessing">Saving...</span>
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

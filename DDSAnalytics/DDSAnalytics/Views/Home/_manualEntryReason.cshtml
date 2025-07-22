@@ -1,0 +1,106 @@
+﻿
+
+@{
+    ViewBag.Title = "ManualEntryReason";
+}
+
+<script src="~/Scripts/app/manualentryreason.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div class="row" ng-controller="manualCalendarController">
+    <div class="col-lg-12">
+        <div class="card" id="customerList">
+
+            <div class="card-header border-bottom-dashed">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0">
+                                Manual List
+                            </h5>
+                        </div>
+                        <div class="input-group mt-3" style="max-width: 400px;">
+                            <input type="text" class="form-control" ng-model="searchLeaveType" placeholder="Type something...">
+                        </div>
+                    </div>
+                    <div class="col-sm-auto">
+                        <div class="d-flex flex-wrap align-items-start gap-2">
+                            <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                            <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showManualModal" ng-click="createNew()"><i class="ri-add-line align-bottom me-1"></i> Add New </button>
+                        </div>
+                        <div class="mt-3 d-flex align-items-center" style="gap: 4px;">
+                            <span>Show</span>
+                            <select class="form-select form-select-sm p-1" style="width: 55px; min-width: 55px; padding-right: 18px;"
+                                    ng-options="size as size for size in [10, 20, 50, 100, 500]"
+                                    ng-model="pageSize"
+                                    ng-change="updatePageSize()">
+                            </select>
+                            <span>entries</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div>
+                    <div class="table-responsive table-card">
+                        <table class="table align-middle" id="customerTable">
+                            <thead class="table-light text-muted">
+                                <tr>
+                                    <th class="sort" data-sort="LeavesType"><a href="#" ng-click="sort('Reason')">Reason<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                                    <th class=" text-center" width="100px" data-sort="action">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="list form-check-all">
+                                <tr dir-paginate="u in manualList | orderBy:sortKey:sortReverse | filter: searchLeaveType: strict | itemsPerPage: pageSize" pagination-id="pagination" ng-cloak>
+                                    <td>{{u.Reason}}</td>
+
+                                    <td class="text-center" width="100px" white-space: nowrap;">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="ri-more-fill align-middle"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item edit-item-btn" data-bs-toggle="modal" data-bs-target="#showManualModal" ng-click="getEdit(u)">
+                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item edit-item-btn" ng-click="getDelete(u)">
+                                                        <i class="ri-delete-bin-2-fill align-bottom me-2 text-muted"></i> Delete
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <div class="row align-items-center mt-2" ng-show="manualList.length>0" ng-cloak>
+                        <div class="col-sm-12 col-md-3 text-left">
+                            <div>
+                                {{(pageSize * (currentPage - 1)) + 1}} - <span ng-show="pageSize*currentPage<=manualList.length">{{ pageSize * currentPage}}</span><span ng-show="pageSize*currentPage>manualList.length">{{ manualList.length }}</span> / {{ manualList.length }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-9">
+                            <dir-pagination-controls pagination-id="pagination" on-Page-Change="getCurrentPage(newPageNumber)" directionLinks="true"
+                                                     template-url="~/Scripts/app/paginat/dirPagination.tpl.html"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.Partial("_addEditManual")
+
+            </div>
+        </div>
+
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->

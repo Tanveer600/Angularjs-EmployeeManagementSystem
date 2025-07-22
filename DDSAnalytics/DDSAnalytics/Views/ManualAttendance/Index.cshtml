@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Manual Attendance";
+}
+<script src="~/Scripts/app/Attendance.js"></script>
+<style>
+    .form-label {
+        margin-bottom: 0 !important;
+    }
+
+</style>
+<div class="row" ng-controller="dailyAttendanceController">
+    <div class="col-xxl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Manual Attendance</h4>
+            </div>
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="javascript:void(0);" class="row g-3">
+
+                        <!-- Employee Dropdown -->
+                        <div class="row mb-4 mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Employee :</label>
+                                <select id="enrollNameSelect" class="form-select"
+                                        ng-model="selectedEmployee"
+                                        ng-change="OnselectedEnrolement(selectedEmployee)">
+                                    <option value="" disabled selected>Please select employee name</option>
+                                    <option ng-repeat="enroll in enrollmentList" ng-value="enroll">
+                                        {{ enroll.EnrollNo + ' - ' + enroll.EnrollName }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Name and Department (Visible after selection) -->
+                        <div class="row mb-4 mt-2" ng-show="selectedEmployee">
+                            <div class="col-md-6">
+                                <label class="form-label">Employee Name:</label>
+                                <input type="text" class="form-control" ng-model="selectedEmployee.EnrollName" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Department Name:</label>
+                                <input type="text" class="form-control" ng-model="selectedEmployee.DeptName" disabled />
+                            </div>
+                        </div>
+                        <!-- Date -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Date :</label>
+                                <input type="date" class="form-control" ng-model="CurrentAttendnnce.AttDate">
+                            </div>
+                        </div>
+                        <!-- Mark In & Mark Out Row -->
+                        <div class="row mb-4">
+                            <!-- Mark In -->
+                            <div class="col-md-6">
+                                <div class="row align-items-center">
+                                    <div class="col-auto d-flex align-items-center ms-3">
+                                        <input class="form-check-input me-2" type="checkbox" id="markInCheck" ng-model="markInChecked">
+                                        <label class="form-check-label mb-0" for="markInCheck">Mark In</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <input type="time" class="form-control"
+                                               ng-model="CurrentAttendnnce.MarkIn"
+                                               ng-disabled="!markInChecked"
+                                               placeholder="Mark In Time">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mark Out -->
+                            <div class="col-md-6">
+                                <div class="row align-items-center">
+                                    <div class="col-auto d-flex align-items-center">
+                                        <input class="form-check-input me-2" type="checkbox" id="markOutCheck" ng-model="markOutChecked">
+                                        <label class="form-check-label mb-0" for="markOutCheck">Mark Out</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="time" class="form-control"
+                                               ng-model="CurrentAttendnnce.MarkOut"
+                                               ng-disabled="!markOutChecked"
+                                               placeholder="Mark Out Time">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Reason -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Reason :</label>
+                                <select id="enrollNameSelect" class="form-select"
+                                        ng-model="CurrentAttendnnce.Status">
+                                    <option value="" disabled selected>Please select Manual Reason name</option>
+                                    <option ng-repeat="obj in leaveTypeList" ng-value="obj.Reason">
+                                        {{ obj.Reason }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <!-- Description -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Description :</label>
+                                <input type="text" class="form-control" ng-model="CurrentAttendnnce.Description" />
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary add-btn" id="add-btn" ng-click="saveAttendance()">
+                                    <i class="icon-dual-danger mr-1" ng-hide="isProcessing"></i>
+                                    <i class="icon-spinner3 spinner mr-1" ng-show="isProcessing"></i>
+                                    <span ng-hide="isProcessing">Save</span>
+                                    <span ng-show="isProcessing">Saving...</span>
+                                </button>     <button type="button" ng-click="cancel()" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

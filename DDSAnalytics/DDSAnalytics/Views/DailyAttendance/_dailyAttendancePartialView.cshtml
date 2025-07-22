@@ -1,0 +1,77 @@
+﻿<div class="modal fade" id="showattendanceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            </div>
+            <form class="tablelist-form" autocomplete="off">
+                <div class="modal-body">             
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Att Date</label>
+                                <input type="date" id="customername-field" class="form-control" ng-model="CurrentAttendnnce.AttDate" placeholder="Enter AttDate" name="Name" required />
+                                <div class="invalid-feedback">Please enter  Attendance Date.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">EnrollNo</label>
+                                <input type="text" id="email-field" class="form-control" ng-model="CurrentAttendnnce.EnrollNo" placeholder="Enter EnrollNo" required />
+                                <div class="invalid-feedback">Please enter EnrollNo.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Verify Mode</label>
+                                <input type="text" id="customername-field" ng-model="CurrentAttendnnce.VerifyMode" class="form-control" placeholder="Enter Verify Mode" required />
+                                <div class="invalid-feedback">Please enter  Verify Mode.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> In out</label>
+                                <input type="text" id="customername-field" ng-model="CurrentAttendnnce.Inout" class="form-control" placeholder="Enter In out" required />
+                                <div class="invalid-feedback">Please enter  In out.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Device Location</label>
+                                <input type="text" id="customername-field" ng-model="CurrentAttendnnce.DeviceLocation" class="form-control" placeholder="Enter DeviceLocation" required />
+                                <div class="invalid-feedback">Please enter  Device Location.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Device IP</label>
+                                <input type="text" id="customername-field" ng-model="CurrentAttendnnce.DeviceIP" class="form-control" placeholder="Enter Device IP" required />
+                                <div class="invalid-feedback">Please enter  Device Location.</div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary add-btn" id="add-btn" ng-disabled="!CurrentAttendnnce.AttDate" ng-click="saveAttendance()">
+                            <i class="icon-dual-danger mr-1" ng-hide="isProcessing"></i>
+                            <i class="icon-spinner3 spinner mr-1" ng-show="isProcessing"></i>
+                            <span ng-hide="isProcessing">Save</span>
+                            <span ng-show="isProcessing">Saving...</span>
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

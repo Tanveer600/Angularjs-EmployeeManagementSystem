@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Hoverable Rows</h4>
+                <div class="flex-shrink-0">
+                    <div class="form-check form-switch form-switch-right form-switch-md">
+                        <label for="hover-rows-showcode" class="form-label text-muted">Show Code</label>
+                        <input class="form-check-input code-switcher" type="checkbox" id="hover-rows-showcode">
+                    </div>
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use <code>table-hover</code> class to enable a hover state on table rows within a &lt;tbody&gt;.</p>
+
+                <div class="live-preview">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-nowrap mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 25px;">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="checkAll" value="option1">
+                                                </div>
+                                            </th>
+                                            <th scope="col">Order ID</th>
+                                            <th scope="col">Shop</th>
+                                            <th scope="col">Customer</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1" checked>
+                                                </div>
+                                            </th>
+                                            <td>#541254265</td>
+                                            <td>Amezon</td>
+                                            <td>Cleo Carson</td>
+                                            <td>$4,521</td>
+                                            <td><a href="javascript:void(0);"><i class="ri-download-2-line fs-17 lh-1 align-middle"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1" checked>
+                                                </div>
+                                            </th>
+                                            <td>#744145235</td>
+                                            <td>Shoppers</td>
+                                            <td>Juston Eichmann</td>
+                                            <td>$7,546</td>
+                                            <td><a href="javascript:void(0);"><i class="ri-download-2-line fs-17 lh-1 align-middle"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
+                                                </div>
+                                            </th>
+                                            <td>#9855126598</td>
+                                            <td>Flipkart</td>
+                                            <td>Bettie Johson</td>
+                                            <td>$1,350</td>
+                                            <td><a href="javascript:void(0);"><i class="ri-download-2-line fs-17 lh-1 align-middle"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option1">
+                                                </div>
+                                            </th>
+                                            <td>#847512653</td>
+                                            <td>Shoppers</td>
+                                            <td>Maritza Blanda</td>
+                                            <td>$4,521</td>
+                                            <td><a href="javascript:void(0);"><i class="ri-download-2-line fs-17 lh-1 align-middle"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-xl-6">
+                            <div class="table-responsive mt-4 mt-xl-0">
+                                <table class="table table-hover table-striped align-middle table-nowrap mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Invoice</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-medium">01</td>
+                                            <td>Basic Plan</td>
+                                            <td>$860</td>
+                                            <td>Nov 22, 2021</td>
+                                            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck1" checked="">
+                                                    <label class="form-check-label ms-2" for="SwitchCheck1">Yes/No</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">02</td>
+                                            <td>Premium Plan</td>
+                                            <td>$1200</td>
+                                            <td>Nov 10, 2021</td>
+                                            <td><i class="ri-close-circle-line align-middle text-danger"></i> Unsubscribed</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck2">
+                                                    <label class="form-check-label ms-2" for="SwitchCheck2">Yes/No</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">03</td>
+                                            <td>Basic Plan</td>
+                                            <td>$860</td>
+                                            <td>Nov 19, 2021</td>
+                                            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
+                                                    <label class="form-check-label ms-2" for="SwitchCheck3">Yes/No</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">04</td>
+                                            <td>Corporate Plan</td>
+                                            <td>$1599</td>
+                                            <td>Nov 22, 2021</td>
+                                            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck4" checked="">
+                                                    <label class="form-check-label ms-2" for="SwitchCheck4">Yes/No</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <div class="d-none code-view">
+<pre class="language-markup" style="height: 275px;"><code>&lt;!-- Hoverable Rows --&gt;
+&lt;table class=&quot;table table-hover table-nowrap mb-0&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;col&quot;&gt;
+                &lt;div class=&quot;form-check&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;checkAll&quot; value=&quot;option1&quot;&gt;
+                &lt;/div&gt;
+            &lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Order ID&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Shop&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Customer&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Price&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;
+                &lt;div class=&quot;form-check&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;inlineCheckbox2&quot; value=&quot;option1&quot; checked&gt;
+                &lt;/div&gt;
+            &lt;/th&gt;
+            &lt;td&gt;#541254265&lt;/td&gt;
+            &lt;td&gt;Amezon&lt;/td&gt;
+            &lt;td&gt;Cleo Carson&lt;/td&gt;
+            &lt;td&gt;$4,521&lt;/td&gt;
+            &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot;&gt;&lt;i class=&quot;ri-download-2-line&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;
+                &lt;div class=&quot;form-check&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;inlineCheckbox3&quot; value=&quot;option1&quot; checked&gt;
+                &lt;/div&gt;
+            &lt;/th&gt;
+            &lt;td&gt;#744145235&lt;/td&gt;
+            &lt;td&gt;Shoppers&lt;/td&gt;
+            &lt;td&gt;Juston Eichmann&lt;/td&gt;
+            &lt;td&gt;$7,546&lt;/td&gt;
+            &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot;&gt;&lt;i class=&quot;ri-download-2-line&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;
+                &lt;div class=&quot;form-check&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;inlineCheckbox4&quot; value=&quot;option1&quot;&gt;
+                &lt;/div&gt;
+            &lt;/th&gt;
+            &lt;td&gt;#9855126598&lt;/td&gt;
+            &lt;td&gt;Flipkart&lt;/td&gt;
+            &lt;td&gt;Bettie Johson&lt;/td&gt;
+            &lt;td&gt;$1,350&lt;/td&gt;
+            &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot;&gt;&lt;i class=&quot;ri-download-2-line&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;
+                &lt;div class=&quot;form-check&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;inlineCheckbox5&quot; value=&quot;option1&quot;&gt;
+                &lt;/div&gt;
+            &lt;/th&gt;
+            &lt;td&gt;#847512653&lt;/td&gt;
+            &lt;td&gt;Shoppers&lt;/td&gt;
+            &lt;td&gt;Maritza Blanda&lt;/td&gt;
+            &lt;td&gt;$4,521&lt;/td&gt;
+            &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot;&gt;&lt;i class=&quot;ri-download-2-line&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code>
+
+<code>&lt;table class=&quot;table table-hover table-striped align-middle table-nowrap mb-0&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;col&quot;&gt;Id&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Invoice&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Amount&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Date&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Status&lt;/th&gt;
+            &lt;th scope=&quot;col&quot;&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;1&lt;/th&gt;
+            &lt;td&gt;Basic Plan&lt;/td&gt;
+            &lt;td&gt;$860&lt;/td&gt;
+            &lt;td&gt;Nov 22, 2021&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;ri-checkbox-circle-line align-middle text-success&quot;&gt;&lt;/i&gt; Subscribed&lt;/td&gt;
+            &lt;td&gt;
+                &lt;div class=&quot;form-check form-switch&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot; id=&quot;SwitchCheck1&quot; checked=&quot;&quot;&gt;
+                    &lt;label class=&quot;form-check-label&quot; for=&quot;SwitchCheck1&quot;&gt;Yes/No&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;2&lt;/th&gt;
+            &lt;td&gt;Premium Plan&lt;/td&gt;
+            &lt;td&gt;$1200&lt;/td&gt;
+            &lt;td&gt;Nov 10, 2021&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;ri-close-circle-line align-middle text-danger&quot;&gt;&lt;/i&gt; Unsubscribed&lt;/td&gt;
+            &lt;td&gt;
+                &lt;div class=&quot;form-check form-switch&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot; id=&quot;SwitchCheck2&quot;&gt;
+                    &lt;label class=&quot;form-check-label&quot; for=&quot;SwitchCheck2&quot;&gt;Yes/No&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;3&lt;/th&gt;
+            &lt;td&gt;Basic Plan&lt;/td&gt;
+            &lt;td&gt;$860&lt;/td&gt;
+            &lt;td&gt;Nov 19, 2021&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;ri-checkbox-circle-line align-middle text-success&quot;&gt;&lt;/i&gt; Subscribed&lt;/td&gt;
+            &lt;td&gt;
+                &lt;div class=&quot;form-check form-switch&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot; id=&quot;SwitchCheck3&quot;&gt;
+                    &lt;label class=&quot;form-check-label&quot; for=&quot;SwitchCheck3&quot;&gt;Yes/No&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope=&quot;row&quot;&gt;4&lt;/th&gt;
+            &lt;td&gt;Corporate Plan&lt;/td&gt;
+            &lt;td&gt;$1599&lt;/td&gt;
+            &lt;td&gt;Nov 22, 2021&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;ri-checkbox-circle-line align-middle text-success&quot;&gt;&lt;/i&gt; Subscribed&lt;/td&gt;
+            &lt;td&gt;
+                &lt;div class=&quot;form-check form-switch&quot;&gt;
+                    &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot; id=&quot;SwitchCheck4&quot; checked=&quot;&quot;&gt;
+                    &lt;label class=&quot;form-check-label&quot; for=&quot;SwitchCheck4&quot;&gt;Yes/No&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+

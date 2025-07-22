@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DDSAnalyticsDBModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="CalendarYears">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.CalendarYear">
+        <MappingFragment StoreEntitySet="CalendarYear">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyAttendances">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.DailyAttendance">
+        <MappingFragment StoreEntitySet="DailyAttendance">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AttDate" ColumnName="AttDate" />
+          <ScalarProperty Name="DeviceLocation" ColumnName="DeviceLocation" />
+          <ScalarProperty Name="DeviceIP" ColumnName="DeviceIP" />
+          <ScalarProperty Name="VerifyMode" ColumnName="VerifyMode" />
+          <ScalarProperty Name="Inout" ColumnName="Inout" />
+          <ScalarProperty Name="EnrollNo" ColumnName="EnrollNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enrollments">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.Enrollment">
+        <MappingFragment StoreEntitySet="Enrollment">
+          <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+          <ScalarProperty Name="ShiftDayChange" ColumnName="ShiftDayChange" />
+          <ScalarProperty Name="MaxShiftEnd" ColumnName="MaxShiftEnd" />
+          <ScalarProperty Name="MinShiftEnd" ColumnName="MinShiftEnd" />
+          <ScalarProperty Name="MaxShiftStart" ColumnName="MaxShiftStart" />
+          <ScalarProperty Name="MinShiftStart" ColumnName="MinShiftStart" />
+          <ScalarProperty Name="LocalID" ColumnName="LocalID" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="ShiftEnd" ColumnName="ShiftEnd" />
+          <ScalarProperty Name="ShiftStart" ColumnName="ShiftStart" />
+          <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+          <ScalarProperty Name="EnrollName" ColumnName="EnrollName" />
+          <ScalarProperty Name="EnrollNo" ColumnName="EnrollNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GazettedHolidays">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.GazettedHoliday">
+        <MappingFragment StoreEntitySet="GazettedHoliday">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leaves">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.Leave">
+        <MappingFragment StoreEntitySet="Leave">
+          <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EnrollNo" ColumnName="EnrollNo" />
+          <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaveTypes">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.LeaveType">
+        <MappingFragment StoreEntitySet="LeaveType">
+          <ScalarProperty Name="LeaveTypeCode" ColumnName="LeaveTypeCode" />
+          <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManualEntryReasons">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.ManualEntryReason">
+        <MappingFragment StoreEntitySet="ManualEntryReason">
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="CanViewLeaveReport" ColumnName="CanViewLeaveReport" />
+          <ScalarProperty Name="CanViewExceptionReport" ColumnName="CanViewExceptionReport" />
+          <ScalarProperty Name="CanViewDailyAttendanceReport" ColumnName="CanViewDailyAttendanceReport" />
+          <ScalarProperty Name="CanViewEmployeeAttendanceReport" ColumnName="CanViewEmployeeAttendanceReport" />
+          <ScalarProperty Name="CanViewAttendanceSummaryReport" ColumnName="CanViewAttendanceSummaryReport" />
+          <ScalarProperty Name="CanViewAttendanceLogs" ColumnName="CanViewAttendanceLogs" />
+          <ScalarProperty Name="CanViewManageSettings" ColumnName="CanViewManageSettings" />
+          <ScalarProperty Name="CanViewEnrollmentList" ColumnName="CanViewEnrollmentList" />
+          <ScalarProperty Name="CanViewEmployees" ColumnName="CanViewEmployees" />
+          <ScalarProperty Name="CanViewDashboard" ColumnName="CanViewDashboard" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+          <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppSettings">
+      <EntityTypeMapping TypeName="DDSAnalyticsDBModel.AppSetting">
+        <MappingFragment StoreEntitySet="AppSetting">
+          <ScalarProperty Name="DayOff2" ColumnName="DayOff2" />
+          <ScalarProperty Name="DayOff1" ColumnName="DayOff1" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="EndClockOutMins" ColumnName="EndClockOutMins" />
+          <ScalarProperty Name="BeginClockOutMins" ColumnName="BeginClockOutMins" />
+          <ScalarProperty Name="EndClockInMins" ColumnName="EndClockInMins" />
+          <ScalarProperty Name="BeginClockInMins" ColumnName="BeginClockInMins" />
+          <ScalarProperty Name="ShiftEndTime" ColumnName="ShiftEndTime" />
+          <ScalarProperty Name="ShiftStartTime" ColumnName="ShiftStartTime" />
+          <ScalarProperty Name="OverTimeMinsAllowed" ColumnName="OverTimeMinsAllowed" />
+          <ScalarProperty Name="EarlyMinsAllowed" ColumnName="EarlyMinsAllowed" />
+          <ScalarProperty Name="LateMinsAllowed" ColumnName="LateMinsAllowed" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="CoyName" ColumnName="CoyName" />
+          <ScalarProperty Name="AppLogo" ColumnName="AppLogo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

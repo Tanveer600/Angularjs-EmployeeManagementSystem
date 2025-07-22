@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Leave Report";
+}
+<script src="~/Scripts/app/leavereport.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div class="row" ng-controller="leaveController">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Leave Detail Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body" ng-show="!isCardHidden" >
+                <!-- Input fields row -->
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <input type="date" class="form-control" placeholder="Start Date" ng-model="LeaveRequest.DateFrom" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="date" class="form-control" placeholder="End Date" ng-model="LeaveRequest.DateTo" />
+                    </div>
+                </div>
+                </div>
+                </div>
+        <div class="row mb-4 mt-4 align-items-center mx-2">
+            <div class="col-md-4 d-flex justify-content-start gap-2">
+                <button class="btn btn-sm btn-primary btn-load" ng-click="filterByDate()">
+                    <span class="d-flex align-items-center">
+                        <span class="spinner-border flex-shrink-0" role="status" ng-show="isProcessing">
+                            <span class="visually-hidden">Loading...</span>
+                        </span>
+                        <span class="flex-grow-1 ms-2" ng-hide="isProcessing">Preview</span>
+                        <span class="flex-grow-1 ms-2" ng-show="isProcessing">Processing ...</span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger add-btn" ng-click="cancel()">Cancel</button>
+
+            </div>
+            <div class="col-md-4 text-center">
+                <h2 class="fw-bold mb-0">Employee Leave Report</h2>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-sm btn-secondary add-btn" ng-click="exportToExcel()">Export</button>
+                <button type="button" class="btn btn-sm btn-info add-btn" ng-click="print()">Print</button>
+            </div>
+        </div>
+        <div class="row mb-4" ng-if="leaveReportList.length > 0">
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Leave Type:</label>
+                    <span class="text-muted">{{ leaveReportList[0].LeaveModel.LeaveTypeName }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Enroll No:</label>
+                    <span class="text-muted">{{ leaveReportList[0].enrollment.EnrollNo }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Start Date:</label>
+                    <span class="text-muted">{{ LeaveRequest.DateFrom | date:'yyyy-MM-dd' }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">End Date:</label>
+                    <span class="text-muted">{{ LeaveRequest.DateTo | date:'yyyy-MM-dd' }}</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="live-preview">
+            <div class="table-responsive table-card ">
+                <table class="table align-middle table-nowrap mb-0" id="customerTable">
+                    <thead class="table-light text-muted">
+                        <tr>
+                            <th class="sort" data-sort="LeavesType"><a href="#" ng-click="sort('LeavesType')">Leaves Type<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                            <th class="sort text-center" data-sort="EnrollNumber"><a href="#" ng-click="sort('EnrollNumber')">Enroll Number<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                            <th class="sort text-center" data-sort="Description"><a href="#" ng-click="sort('Description')">Description<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                            <th class="sort text-center" data-sort="LogiStartDatenID"><a href="#" ng-click="sort('StartDate')">Start Date<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                            <th class="text-center" data-sort="EndDate"><a href="#" ng-click="sort('EndDate')">End Date<i class="mi-keyboard-arrow-up ml-2" ng-show="isSortedAsc"></i><i class="mi-keyboard-arrow-down ml-2" ng-hide="isSortedAsc"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody class="scrollable-table-wrapper">
+                        <tr ng-repeat="u in leaveReportList | orderBy:sortKey:sortReverse" ng-cloak>
+                            <td>{{u.LeaveModel.LeaveTypeName}}</td>
+                            <td class="text-center">{{u.enrollment.EnrollNo}}</td>
+                            <td class="text-center">{{u.leave.Description}}</td>
+                            <td class="text-center">{{u.leave.StartDate | date:'dd-MM-yyyy'}}</td>
+                            <td class="text-center">{{u.leave.EndDate | date:'dd-MM-yyyy'}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+
+

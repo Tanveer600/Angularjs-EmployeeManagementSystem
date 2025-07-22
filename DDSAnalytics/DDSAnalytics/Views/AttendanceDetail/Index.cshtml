@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Attendance Report";
+}
+
+<script src="~/Scripts/app/attendanceDetail.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div class="row" ng-controller="attendanceDetailsController">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Attendance Detail Report</h4>
+
+               
+            </div><!-- end card header -->
+
+            <div class="card-body" ng-show="!isCardHidden">
+                <!-- Input fields row -->
+                <div class="row mb-3">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="departmentSelect" class="form-label">Department Name</label>
+                        <select id="departmentSelect" class="form-select"
+                                ng-model="selectedDepartmentName"
+                                ng-change="onDepartmentChange()">
+                            <option value="All" selected>--- All ---</option>
+                            <option ng-repeat="d in deptList" value="{{d}}">
+                                {{d}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="departmentSelect" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" placeholder="Start Date" ng-model="attendanceRequest.DateFrom" ng-change="setEndDate()" />
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="row mb-4 mt-4 align-items-center mx-2">
+                    <div class="col-md-4 d-flex justify-content-start gap-2">
+                        <button class="btn btn-sm btn-primary btn-load" ng-click="previewListBuuton()">
+                            <span class="d-flex align-items-center">
+                                <span class="spinner-border flex-shrink-0" role="status" ng-show="isProcessing">
+                                    <span class="visually-hidden">Loading...</span>
+                                </span>
+                                <span class="flex-grow-1 ms-2" ng-hide="isProcessing">Preview</span>
+                                <span class="flex-grow-1 ms-2" ng-show="isProcessing">Processing ...</span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger add-btn" ng-click="cancel()">Cancel</button>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <h2 class="fw-bold mb-0">Daily Attendance Report</h2>
+                    </div>
+
+                    <div class="col-md-4 d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-sm btn-secondary add-btn" ng-click="export()">Export</button>
+                        <button type="button" class="btn btn-sm btn-info add-btn" ng-click="print()">Print</button>
+                    </div>
+                </div>
+
+
+                <div class="row mb-3" ng-if="attendanceList.length > 0">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <label class="form-label fw-bold me-2" style="width: 140px;">Department Name:</label>
+                            <span class="text-muted">{{ attendanceRequest.DeptName }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <label class="form-label fw-bold me-2" style="width: 140px;">Attendance Date:</label>
+                            <span class="text-muted">{{attendanceRequest.DateFrom | date: 'yyyy-MM-dd' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-preview">
+                    <div class="table-responsive table-card ">
+                        <table class="table align-middle table-nowrap mb-0" id="customerTable">
+                            <thead class="table-light text-muted">
+                                <tr>
+                                    <th scope="col">Code #</th>
+                                    <th class="text-center" scope="col">Name</th>
+                                    <th class="text-center" scope="col">Department</th>
+                                    <th class="text-center" scope="col">Clock In</th>
+                                    <th class="text-center" scope="col">Clock Out</th>
+                                    <th class="text-center" scope="col">Hours Worked</th>
+                                    <th class="text-center" scope="col">Late Mins</th>
+                                    <th class="text-center" scope="col">Early Mins</th>
+                                    <th class="text-center" scope="col">Overtime Mins</th>
+                                    <th class="text-center" scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="scrollable-table-wrapper">
+                                <tr ng-repeat="item in attendanceList"
+                                    ng-cloak
+                                    ng-class="{'absent-row': item.ClockIn == null && item.ClockOut == null}">
+                                    <td>{{item.EnrollNo}}</td>
+                                    <td class="text-center">{{item.EnrollName}}</td>
+                                    <td class="text-center">{{item.DepartmentName}}</td>
+                                    <td class="text-center">{{item.ClockIn | date:'shortTime'}}</td>
+                                    <td class="text-center">{{item.ClockOut | date:'shortTime'}}</td>
+                                    <td class="text-center">{{item.HrsWorked}}</td>
+                                    <td class="text-center">{{item.LateMins | number:0}}</td>
+                                    <td class="text-center">{{item.EarlyMins | number:0}}</td>
+                                    <td class="text-center">{{item.OvertimeMins | number:0}}</td>
+                                    <td class="text-center">{{item.Status}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>                   
+                </div>
+            </div>
+
+        </div>
+   
+

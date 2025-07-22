@@ -1,0 +1,75 @@
+﻿
+<div class="modal fade" id="showCalendarYearModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            </div>
+            <form class="tablelist-form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">Title</label>
+                                <input type="text" class="form-control" ng-model="currentCalendarYear.Title" placeholder="Enter Title " />
+                                <div class="invalid-feedback">Please enter Title.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" ng-model="currentCalendarYear.StartDate" />
+                                <div class="invalid-feedback">Please enter Start Date.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">End Date</label>
+                                <input type="date" class="form-control" ng-model="currentCalendarYear.EndDate" />
+                                <div class="invalid-feedback">Please enter End Date.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       id="isActiveCheckbox"
+                                       ng-model="currentCalendarYear.IsActive">
+                                <label class="form-check-label" for="isActiveCheckbox">Is Active</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit"
+                                    class="btn btn-primary add-btn"
+                                    id="add-btn"
+                                    ng-click="save()"
+                                    ng-disabled="isProcessing">
+                                <span ng-if="!isProcessing">Save</span>
+                                <span ng-if="isProcessing">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...
+                                </span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

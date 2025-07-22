@@ -1,0 +1,297 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+<script src="~/Scripts/app/dashboard.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div ng-controller="dashboardController" ng-cloak>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                @*<h4 class="mb-sm-0">Projects</h4>*@
+                @*<div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
+                            <li class="breadcrumb-item active">Projects</li>
+                        </ol>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row project-wrapper">
+        <div class="col-xxl-12">
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-primary-subtle text-primary rounded-2 fs-2">
+                                        <i data-feather="users" class="text-primary"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden ms-3">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Enrolled</p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <h4 class="fs-4 flex-grow-1 mb-0">
+                                            <span>{{ totalEnrolled }}</span> <!-- SIMPLE binding -->
+                                        </h4> 
+                                        @*<span class="badge bg-danger-subtle text-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>5.02 %</span>*@
+                                    </div>
+                                    <p class="text-muted text-truncate mb-0">Total Employees List</p>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-xl-3">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-info-subtle text-info rounded-2 fs-2">
+                                        <i data-feather="activity" class="text-success"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-medium text-muted mb-3">Todays Present</p>
+                                    <div class="d-flex align-items-center mb-3">                                    
+                                        <h4 class="fs-4 flex-grow-1 mb-0"> <span>{{ todaysPresent }}</span></h4>
+                                        @*<span class="badge bg-success-subtle text-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span>*@
+                                    </div>
+                                    <p class="text-muted mb-0">Present Employees of Today </p>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div>
+                </div><!-- end col -->
+
+
+                <div class="col-xl-3">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-info-subtle text-info rounded-2 fs-2">
+                                        <i data-feather="clipboard" class="text-warning"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-medium text-muted mb-3">Total Onleave</p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value">0</span></h4>
+                                        @*<span class="badge bg-success-subtle text-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span>*@
+                                    </div>
+                                    <p class="text-muted mb-0">Todays On Leave </p>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-xl-3">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-info-subtle text-info rounded-2 fs-2">
+                                        <i data-feather="user-x" class="text-danger"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="text-uppercase fw-medium text-muted mb-3">Todays Absent</p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <h4 class="fs-4 flex-grow-1 mb-0"><span>{{todaysAbsent}}</span></h4>
+                                        @*<span class="badge bg-success-subtle text-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span>*@
+                                    </div>
+                                    <p class="text-muted mb-0">Total Absent Todays </p>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div>
+                </div><!-- end col -->
+
+            </div><!-- end row -->
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header border-0 align-items-center d-flex">
+                            <h4 class="card-title mb-0 flex-grow-1">Attendance Overview</h4>
+                            <div>
+                                <button type="button" class="btn btn-soft-secondary btn-sm" ng-click="getAttendanceGraphData('present')">
+                                  Current  Month
+                                </button>
+                                <button type="button" class="btn btn-soft-secondary btn-sm" ng-click="getAttendanceGraphData('previous')">
+                                    Previous Month
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0 pb-2">
+                            <div>
+                                <div id="projects-overview-chart" class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="col-xl-12">
+        <div class="card">
+            <div class="card-header border-0 align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Attendance Overview</h4>
+                <div>
+                    <button type="button" class="btn btn-soft-secondary btn-sm" ng-click="getAttendanceGraphData('present')">
+                        Present
+                    </button>
+                    <button type="button" class="btn btn-soft-secondary btn-sm" ng-click="getAttendanceGraphData('previous')">
+                        Previous
+                    </button>
+
+
+                </div>
+            </div>-->
+                <!-- end card header -->
+                <!--<div class="card-header p-0 border-0 bg-light-subtle">
+        <div class="row g-0 text-center">
+            <div class="col-6 col-sm-3">
+                <div class="p-3 border border-dashed border-start-0">
+                    <h5 class="mb-1"><span class="counter-value" data-target="9851">0</span></h5>
+                    <p class="text-muted mb-0">Number of Persons</p>
+                </div>
+            </div>-->
+                <!--end col-->
+                <!--<div class="col-6 col-sm-3">
+        <div class="p-3 border border-dashed border-start-0">
+            <h5 class="mb-1"><span class="counter-value" data-target="1026">0</span></h5>
+            <p class="text-muted mb-0">Avg Present</p>
+        </div>
+    </div>-->
+                <!--end col-->
+                <!--<div class="col-6 col-sm-3">
+        <div class="p-3 border border-dashed border-start-0">
+            <h5 class="mb-1">$<span class="counter-value" data-target="228.89">0</span>k</h5>
+            <p class="text-muted mb-0">Avg OnLeave</p>
+        </div>
+    </div>-->
+                <!--end col-->
+                <!--<div class="col-6 col-sm-3">
+        <div class="p-3 border border-dashed border-start-0 border-end-0">
+            <h5 class="mb-1 text-success"><span class="counter-value" data-target="10589">0</span>h</h5>
+            <p class="text-muted mb-0">Avg Absent</p>
+        </div>
+    </div>-->
+                <!--end col-->
+                <!--</div>
+    </div>-->
+                <!-- end card header -->
+                <!--<div class="card-body p-0 pb-2">
+        <div>
+            <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-info", "--vz-warning"]' class="apex-charts" dir="ltr"></div>
+        </div>
+    </div>-->
+                <!-- end card body -->
+                <!--</div>--><!-- end card -->
+                <!--</div>--><!-- end col -->
+            </div>
+        </div><!-- end col -->
+
+    </div><!-- end row -->
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card card-height-100">
+                <div class="card-header d-flex align-items-center">
+                    <h4 class="card-title flex-grow-1 mb-0">Todays Present</h4>
+                    <div class="flex-shrink-0">
+                        <a href="javascript:void(0);" ng-click="exportToExcel()" class="btn btn-soft-info btn-sm">Export Report</a>
+
+                    </div>
+                </div><!-- end cardheader -->
+                <div class="card-body">
+                    <div class="table-responsive table-card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Enroll No</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Department</th>
+                                    <th class="text-center">Shift</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Clock In</th>
+                                    <th class="text-center">Clock Out</th>
+                                </tr>
+                            </thead>
+                            <tbody class="scrollable-table-wrapper">
+                                <tr ng-repeat="att in attendanceList">
+                                    <td>{{ att.EnrollNo }}</td>
+                                    <td class="text-center">{{ att.EnrollName }}</td>
+                                    <td class="text-center">{{ att.DepartmentName }}</td>
+                                    <td class="text-center">{{ att.ShiftName }}</td>
+                                    <td class="text-center">{{ att.AttDate | date:'yyyy-MM-dd' }}</td>
+                                    <td class="text-center">{{ att.Status }}</td>
+                                    <td class="text-center">{{ att.ClockIn | date:'shortTime' }}</td>
+                                    <td class="text-center">{{ att.ClockOut | date:'shortTime' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                   
+
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+
+        <div class="col-xl-4">
+            <div class="card card-height-100">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1 py-1">Departmental Strength</h4>
+                    <div class="flex-shrink-0">
+                       
+                        @*<div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-muted">All Tasks <i class="mdi mdi-chevron-down ms-1"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">All Tasks</a>
+                                <a class="dropdown-item" href="#">Completed </a>
+                                <a class="dropdown-item" href="#">Inprogress</a>
+                                <a class="dropdown-item" href="#">Pending</a>
+                            </div>
+                        </div>*@
+                    </div>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="table-responsive table-card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Department Name</th>
+                                    <th class="text-center" scope="col">Total Employee</th>
+                                    <th class="text-center" scope="col">Presents</th>
+                                    <th class="text-center" scope="col">Absents</th>
+                                </tr>
+                            </thead><!-- end thead -->
+                            <tbody class="scrollable-table-wrapper">
+                                <tr ng-repeat="dept in DepartmentalAttendance">
+                                    <td>{{ dept.DeptName }}</td>
+                                    <td class="text-center">{{ dept.TotalEnrolled }}</td>
+                                    <td class="text-center"><span class="badge bg-success-subtle text-success">{{ dept.TotalPresent }}</span></td>
+                                    <td class="text-center"><span class="badge bg-danger-subtle text-danger">{{ dept.TotalAbsent }}</span></td>
+
+                                </tr><!-- end -->
+
+
+                            </tbody><!-- end tbody -->
+                        </table><!-- end table -->
+                    </div>
+
+                </div><!-- end cardbody -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+    </div><!-- end row -->
+</div><!-- end row -->

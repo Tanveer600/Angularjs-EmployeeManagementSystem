@@ -1,0 +1,110 @@
+﻿<div class="modal fade" id="showLeaveModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>*@
+            </div>
+            <form class="tablelist-form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="row">
+                       
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label">Employee </label>
+                                <select id="enrollNameSelect" class="form-select"
+                                        ng-model="selectedEmployee"
+                                        ng-change="OnselectedEnrolement(selectedEmployee)">
+                                    <option value="" disabled selected> Please select employee name</option>
+                                    <option ng-repeat="enroll in enrollmentList" ng-value="enroll"> {{ enroll.EnrollNo + ' - ' + enroll.EnrollName }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="leaveType-field" class="form-label">Leave Types</label>
+                                <select id="enrollNameSelect" class="form-select"
+                                        ng-model="selectedLeaveType"
+                                        ng-change="OnselectedLeaveType(selectedLeaveType)">
+                                    <option value="" disabled selected>Please select leave type name</option>
+                                    <option ng-repeat="enroll in leaveTypeList" ng-value="enroll">
+                                        {{ enroll.LeaveTypeName }}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">Please select a leave type.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="balance-field" class="form-label">Total Leave Availed</label>
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           id="balance-field"
+                                           ng-model="TotalDays"
+                                           placeholder="0"
+                                           disabled />
+
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            ng-click="viewLeaves()"
+                                            style="border-left: none;">
+                                        View
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">                       
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Start Date</label>
+                                <input type="date" ng-model="currentLeave.leave.StartDate" class="form-control" placeholder="Enter Start Date" autocomplete="current-password" required />
+                                <div class="invalid-feedback">Please enter Login Pwd.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">End Date</label>
+                                <input type="date" class="form-control" ng-model="currentLeave.leave.EndDate" placeholder="Enter End Date" />
+                                <div class="invalid-feedback">Please enter Login ID.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">Description</label>
+                                <input type="text" class="form-control" ng-model="currentLeave.leave.Description" placeholder="Enter Description " />
+                                <div class="invalid-feedback">Please enter Login ID.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" ng-click="resetLeaveForm()" data-bs-dismiss="modal">Close</button>
+                            <button type="submit"
+                                    class="btn btn-primary add-btn"
+                                    id="add-btn"
+                                    ng-click="save()"
+                                    ng-disabled="isProcessing">
+                                <span ng-if="!isProcessing">Save</span>
+                                <span ng-if="isProcessing">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...
+                                </span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                    </form>
+        </div>
+    </div>
+</div>
+
+

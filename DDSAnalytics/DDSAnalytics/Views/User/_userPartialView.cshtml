@@ -1,0 +1,71 @@
+﻿<div class="modal fade" id="showUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            </div>
+            <form class="tablelist-form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> User Name</label>
+                                <input type="text" class="form-control" ng-model="currentUser.user.Name" name="UserName" placeholder="Enter User Name" required />
+                                <div class="invalid-feedback">Please enter  name.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label">Role</label>
+                                <select class="form-select"
+                                        ng-model="selectedRole"
+                                        ng-change="onRoleSelect(selectedRole)">
+                                    <option value="" selected>Please select Roles</option>
+                                    <option ng-repeat="item in roleList" ng-value="item">{{item.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">Login ID</label>
+                                <input type="text" class="form-control" ng-model="currentUser.user.LoginID" placeholder="Enter Login ID" />
+                                <div class="invalid-feedback">Please enter Login ID.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label"> Login Password</label>
+                                <input type="password" ng-model="currentUser.user.LoginPwd" class="form-control" placeholder="Enter Login Pwd" autocomplete="current-password" required />
+                                <div class="invalid-feedback">Please enter Login Pwd.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customername-field" class="form-label">Role</label>
+                                <select class="form-select"
+                                        ng-model="selectedRole"
+                                        ng-change="onRoleSelect(selectedRole)">
+                                    <option value="" selected>Please select Roles</option>
+                                    <option ng-repeat="item in enrollmentList" ng-value="item">{{item.EnrollName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary add-btn" ng-disabled="!currentUser.user.LoginPwd" id="add-btn" ng-click="save()">Save</button>
+                        </div>
+                    </div>
+</form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Attendance Summary";
+}
+
+<script src="~/Scripts/app/attendanceSummary.js"></script>
+<link href="~/Content/user.css" rel="stylesheet" />
+<div class="row" ng-controller="attendanceSummaryController">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Attendance Summary Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body" ng-show="!isCardHidden">
+                <!-- Input fields row -->
+                <div class="row mb-3">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="departmentSelect" class="form-label">Department Name</label>
+                        <select id="departmentSelect" class="form-select"
+                                ng-model="selectedDepartmentName"
+                                ng-change="onDepartmentChange()">
+                            <option value="All" selected>--- All ---</option>
+                            <option ng-repeat="d in deptList" value="{{d}}">
+                                {{d}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Enroll Name Dropdown -->
+                    <div class="col-md-6 mb-3">
+                        <label for="enrollNameSelect" class="form-label">Employee Name</label>
+                        <select id="enrollNameSelect" class="form-select"
+                                ng-model="selectedEnrolement">
+                            <option value="All" selected>--- All ---</option>
+                            <option ng-repeat="enroll in filteredEnrolmentList"
+                                    value="{{enroll.EnrollNo}}">
+                                {{ enroll.EnrollNo + ' - ' + enroll.EnrollName }}
+
+                            </option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <!-- Date Range Fields -->
+                <div class="row mb-3">
+                    <!-- From Date -->
+                    <div class="col-md-6 mb-3">
+                        <label for="fromDate" class="form-label">From Date</label>
+                        <input id="fromDate" type="date" class="form-control" ng-model="attendanceRequest.DateFrom" />
+                    </div>
+
+                    <!-- To Date -->
+                    <div class="col-md-6 mb-3">
+                        <label for="toDate" class="form-label">To Date</label>
+                        <input id="toDate" type="date" class="form-control" ng-model="attendanceRequest.DateTo"  max="{{ today | date:'yyyy-MM-dd' }}" />
+                    </div>
+                </div>
+
+                <span class="text-danger" ng-show="attendanceRequest.DateFrom > attendanceRequest.DateTo">
+                    "From Date" must be before "To Date."
+                </span>
+            </div>
+
+        </div>
+        <div class="row mb-4 mt-4 align-items-center mx-2">
+            <div class="col-md-4 d-flex justify-content-start gap-2">
+                <button class="btn btn-sm btn-primary btn-load" ng-click="preview()">
+                    <span class="d-flex align-items-center">
+                        <span class="spinner-border flex-shrink-0" role="status" ng-show="isProcessing">
+                            <span class="visually-hidden">Loading...</span>
+                        </span>
+                        <span class="flex-grow-1 ms-2" ng-hide="isProcessing">Preview</span>
+                        <span class="flex-grow-1 ms-2" ng-show="isProcessing">Processing ...</span>
+                    </span>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger add-btn" ng-click="cancel()">Cancel</button>
+
+            </div>
+            <div class="col-md-4 text-center">
+                <h2 class="fw-bold mb-0">Attendance Summary Report</h2>
+            </div>
+            <div class="col-md-4 text-end">
+                <button type="button" class="btn btn-sm btn-secondary add-btn" ng-click="export()">Export </button>
+                <button type="button" class="btn btn-sm btn-info add-btn" ng-click="print()">Print</button>
+            </div>
+        </div>
+        <!-- Info Labels Two-in-One Row Layout -->
+        <div class="row mb-4" ng-if="attendanceSummaryList.length > 0">
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Department Name:</label>
+                    <span class="text-muted">{{ attendanceRequest.DeptName }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Enrollment Name:</label>
+                    <span class="text-muted">{{ attendanceSummaryList[0].Name }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Date From:</label>
+                    <span class="text-muted">{{ attendanceRequest.DateFrom | date:'dd-MM-yyyy' }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex">
+                    <label class="form-label fw-bold me-3" style="width: 140px;">Date To:</label>
+                    <span class="text-muted">{{ attendanceRequest.DateTo | date:'dd-MM-yyyy' }}</span>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="live-preview">
+            <div class="table-responsive table-card ">
+                <table class="table align-middle table-nowrap mb-0" id="customerTable">
+                    <thead class="table-light text-muted">
+                        <tr>
+                            <th><a href="#" ng-click="sort('Code')">Code</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('Name')">Name</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('MonthlyDays')">Monthly Days</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('WorkingDays')">Working Days</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('AbsentDays')">Absents</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('HolidayPresentDays')">Holidays</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('InOutErrorInDays')">I/O Error(days)</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('LateComming')">Late(mins)</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('EarlyGoing')">Early(mins)</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('TotalLate')">Total Late(mins)</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('OverTime')">OT(mins)</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('AutoAdjustment')">Auto Adjustment</a></th>
+                            <th class="text-center"><a href="#" ng-click="sort('OverTimeInHours')">OT(hrs)</a></th>
+                        </tr>
+                    </thead>
+                    <tbody class="scrollable-table-wrapper">
+                        <tr ng-repeat="item in attendanceSummaryList" ng-cloak>
+                            <td>{{item.Code}}</td>
+                            <td>{{item.Name}}</td>
+                            <td class="text-center">{{item.MonthlyDays}}</td>
+                            <td class="text-center">{{item.WorkingDays}}</td>
+                            <td class="text-center">{{item.AbsentDays}}</td>
+                            <td class="text-center">{{item.TotalHolidays}}</td>
+                            <td class="text-center">{{item.InOutErrorDays}}</td>
+                            <td class="text-center">{{item.LateMinutes | number:0}}</td>
+                            <td class="text-center">{{item.EarlyMinutes | number:0}}</td>
+                            <td class="text-center">{{item.TotalLateMinutes | number:0 }}</td>
+                            <td class="text-center align-middle">{{item.OvertimeMinutes | number:0 }}</td>
+                            <td class="text-center align-middle">{{item.AutoAdjustment | number:0 }}</td>
+                            <td class="text-center align-middle">{{item.OvertimeInHours | number:0 }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div><!-- end card-body -->
+</div><!-- end card -->

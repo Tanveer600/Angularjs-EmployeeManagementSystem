@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="CanViewLeaves" ColumnName="CanViewLeaves" />
+          <ScalarProperty Name="CanViewEmployees" ColumnName="CanViewEmployees" />
+          <ScalarProperty Name="CanViewReports" ColumnName="CanViewReports" />
+          <ScalarProperty Name="CanViewDashboard" ColumnName="CanViewDashboard" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+          <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
